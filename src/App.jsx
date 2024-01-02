@@ -1,6 +1,7 @@
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import './App.css'
 import Home from './pages/Home'
+import Login from './pages/Login'
 import { useEffect,useState } from 'react'
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
     },[])
 
   return (
-    <>
+    <div>
         {
             loggedIn?
             <Router>
@@ -35,10 +36,10 @@ function App() {
             </Router>
             :
             <div>
-                <h1>Not Logged In</h1>
+                <Login/>
             </div>
         }
-    </>
+    </div>
   )
 }
 
