@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 export default function Login() {
 
-    const [credentials,setCredentials]=useState({password:'',username:''})
+    const [credentials,setCredentials]=useState({password:'',email:''})
 
     const inputStyle="bg-[#1b1b1b] rounded-md text-white px-2 p-1 w-80 focus:outline-none border-solid border-white border-[1px] border-opacity-50 focus:border-opacity-100 hover:border-opacity-100 font-normal "
 
@@ -12,11 +12,11 @@ export default function Login() {
 
     const loginUser=()=>{
         console.log(credentials,"credentials")
-        fetch('https://dummyjson.com/auth/login', {
+        fetch('https://localhost:3000/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                username : credentials.username,
+                email : credentials.email,
                 password : credentials.password,
              })
         })
@@ -37,9 +37,9 @@ export default function Login() {
                 <h1 className="text-white mb-3 text-2xl font-bold">Login</h1>
                 
                 <div className={inputLabelContainer}>
-                    <label>username</label>
-                    <input type="username" id="username" name="username" className={inputStyle} 
-                        onChange={(e)=>setCredentials({...credentials,username:e.target.value})}/>
+                    <label>Email</label>
+                    <input type="email" id="email" name="email" className={inputStyle} 
+                        onChange={(e)=>setCredentials({...credentials,email:e.target.value})}/>
                 </div>
 
                 <div className={inputLabelContainer}>
