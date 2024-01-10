@@ -20,6 +20,21 @@ function App() {
         console.log(cookies)
         if (cookies.LOGIN_INFO){
             setLoggedIn(true)
+            console.log("No cookie")
+            console.log(cookies.LOGIN_INFO,"token")
+            fetch('https://dummyjson.com/auth/RESOURCE',{
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInVzZXJuYW1lIjoia21pbmNoZWxsZSIsImVtYWlsIjoia21pbmNoZWxsZUBxcS5jb20iLCJmaXJzdE5hbWUiOiJKZWFubmUiLCJsYXN0TmFtZSI6IkhhbHZvcnNvbiIsImdlbmRlciI6ImZlbWFsZSIsImltYWdlIjoiaHR0cHM6Ly9yb2JvaGFzaC5vcmcvYXV0cXVpYXV0LnBuZyIsImlhdCI6MTcwNDI4OTkzMSwiZXhwIjoxNzA0MjkzNTMxfQ.grwkxh8xUlLHSrxELFdJQ_myWGdOKJER9ZhC2_3R4yU', 
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(res => console.log(res,"ress"))
+            .then(res => res.json())
+            .then(res=>{
+                console.log(res,"Res")
+            })
+            .catch(err => console.log(err,"erer"))
         }
     },[])
 
@@ -27,13 +42,13 @@ function App() {
     <div>
         {
             loggedIn?
-            <Router>
-                <Routes>
-                    <Route
-                        path='/' element={<Home />}
-                        />
-                </Routes>
-            </Router>
+                <Router>
+                    <Routes>
+                        <Route
+                            path='/' element={<Home />}
+                            />
+                    </Routes>
+                </Router>
             :
             <div >
                 <Login/>

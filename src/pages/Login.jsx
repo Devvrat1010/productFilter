@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 export default function Login() {
 
-    const [credentials,setCredentials]=useState({email:'',password:'',username:''})
+    const [credentials,setCredentials]=useState({password:'',username:''})
 
     const inputStyle="bg-[#1b1b1b] rounded-md text-white px-2 p-1 w-80 focus:outline-none border-solid border-white border-[1px] border-opacity-50 focus:border-opacity-100 hover:border-opacity-100 font-normal "
 
@@ -18,8 +18,7 @@ export default function Login() {
             body: JSON.stringify({
                 username : credentials.username,
                 password : credentials.password,
-                // expiresInMins: 60, // optional
-            })
+             })
         })
         .then(res => res.json())
         .then(res=>{
@@ -37,20 +36,15 @@ export default function Login() {
             <form action="" id="formData" className="bg-[#1b1b1b] flex flex-col w-fit p-5 rounded-md gap-3 text-white font-medium" >
                 <h1 className="text-white mb-3 text-2xl font-bold">Login</h1>
                 
-                
                 <div className={inputLabelContainer}>
-                    <label for="email">Email</label>
-                    <input type="email" placeholder="" className={inputStyle}
-                        onChange={(e)=>setCredentials({...credentials,email:e.target.value})}/>
-                </div>
-                <div className={inputLabelContainer}>
-                    <label for="username">username</label>
-                    <input type="username" placeholder="" className={inputStyle}
+                    <label>username</label>
+                    <input type="username" id="username" name="username" className={inputStyle} 
                         onChange={(e)=>setCredentials({...credentials,username:e.target.value})}/>
                 </div>
+
                 <div className={inputLabelContainer}>
-                    <label for="email">Password</label>
-                    <input type="password" placeholder="" className={inputStyle}
+                    <label>Password</label>
+                    <input type="password" id="password" name="password" placeholder="" className={inputStyle}
                         onChange={(e)=>setCredentials({...credentials,password:e.target.value})}/>
                 </div>
                 
