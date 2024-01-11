@@ -20,21 +20,27 @@ const dbURI=process.env.DB_URI
 const PORT = process.env.PORT || 3000
 
 
-const saveImage = require("./routes/saveImage");
-const getImage = require("./routes/getImage");
-const signIn = require("./routes/signIn");
-const login=require('./routes/login')
+const saveImage = require("./routes/imageCRUD/saveImage");
+const getImage = require("./routes/imageCRUD/getImage");
+const signUp = require("./routes/userCRUD/signUp");
+const login=require('./routes/userCRUD/login')
 const checkUser=require('./middleware/checkUser')
+const update=require('./routes/userCRUD/update')
+const deleteUser=require('./routes/userCRUD/delete')
+
 
 app.use("/saveImage", saveImage)
 app.use("/getImage", getImage)
-app.use("/signIn", signIn)
+app.use("/signUp", signUp)
 app.use("/login", login)
 app.use("/checkUser", checkUser)
+app.use("/update", update)
+app.use("/delete", deleteUser)
 
 const start=async()=>{
     try{
         await client.connect()
+        
         app.listen(PORT,()=>{
             console.log(`Listening on port ${PORT}`);
         })

@@ -1,11 +1,4 @@
-// const mongoose=require('mongoose');
 
-// const allUserschema=new mongoose.Schema({
-//     username:String,
-//     image: [String],
-// })
-
-// module.exports=mongoose.model('Image',allUserschema)
 const client = require("../mongodb");
 async function allUsers() {
     try {

@@ -3,7 +3,8 @@ const router = express.Router();
 const bcrypt=require('bcrypt')
 const saltRounds = 10;
 const jwt=require('jsonwebtoken')
-const User=require('../models/users')
+const User=require('../../models/users')
+const Admin=require('../../models/adminEmails')
 const maxAge=3*24*60*60
 
 const createToken=(id)=>{
@@ -12,19 +13,31 @@ const createToken=(id)=>{
     })
 }
 
+const validateAdmin=async (email)=>{
+    const conn=await Admin()
+    const checkMail=await conn.findOne({email:email})
+    console.log(checkMail,"checkMail")
+    if (!checkMail){
+        console.log("false--------------------------------------")
+        return false
+    }
+    else{
+        console.log("true--------------------------------------")
+        return true
+    }
+}
+
 const validate=async (data)=>{
-    const {username,email,password}=data
-    if (!username || !email || !password){
+    const {email,password,admin}=data
+
+    if (!email || !password){
         return {message:"Please enter all the fields"}
     }
-    if (username.length<1 || email.length<1 || password.length<1){
+    if (email.length<1 || password.length<1){
         return {message:"Please enter all the fields"}
     }
     if (password.length<6){
         return {message:"Password should be atleast 6 characters long"}
-    }
-    if (username.includes(" ")){
-        return {message:"Username should only contain alphabets and numbers and special characters like _ - ."}
     }
     if (email.includes(" ")){
         return {message:"Invalid email address"}
@@ -34,31 +47,39 @@ const validate=async (data)=>{
 
 router.post("/", async (req, res) => {
     try{
+
         const user=await User()
         const existingUser=await user.find().toArray()
-        console.log(existingUser,"existingUser")
-        const check=await existingUser.filter((user)=>{
-            if (user.username===req.body.username){
-                res.status(400).json({error:"Username already exists"})
-                return true
-            }
-            else if (user.email===req.body.email){
-                res.status(400).json({error:"Email already exists"})
-                return true
-            }
-        })
 
-        if (check!==true){
+        const admin=req.body.admin
+        let createAdmin=false
+
+        if (admin){
+            if (await validateAdmin(req.body.email)===true){
+                createAdmin=true
+            }
+            else{
+                return res.status(400).json({error:"Invalid admin email"})
+            }   
+        }
+
+        const emailExists = existingUser.some((u) => u.email === req.body.email);
+        
+        if (emailExists) {
+            return res.status(400).json({ error: "Email already exists" });
+        }
+
+        else{
             const validation=await validate(req.body)
             if (validation===true){
                 const hash = bcrypt.hashSync(req.body.password, saltRounds);
-                const new_user=await user.insert({
+                const new_user=await user.insertOne({
                     name:req.body.name,
-                    username:req.body.username,
                     email:req.body.email,
                     password:hash,
                     number:req.body.number,
-                    image:req.body.image
+                    image:req.body.image,
+                    admin:createAdmin
                 })
                 const token=createToken(new_user._id)
                 res.status(200).cookie('LOGIN_INFO',token).json({message:new_user,token:token})
@@ -69,15 +90,12 @@ router.post("/", async (req, res) => {
                 return
             }
         }
-        else{
-            res.status(400).json({error:"User already exists"})
-            return
-        }
-        return 
+
     }
     catch(error){
         console.log(error,"error")
         res.status(500).json({ error: error,message:"server side error"})
+        return
     }
 })
 
