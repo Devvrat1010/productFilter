@@ -1,7 +1,8 @@
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import './App.css'
 // import Home from './pages/Home'
-import Login from './pages/Login'
+import Login from './pages/login'
+import SignUp from './pages/signUp'
 import { useEffect,useState } from 'react'
 
 function App() {
@@ -15,9 +16,8 @@ function App() {
                 loggedIn?
                     <Router>
                         <Routes>
-                            <Route
-                                path='/' element={<Login />}
-                                />
+                            <Route path='/login' element={<Login />} />
+                            <Route path='/signUp' element={<SignUp />} />
                         </Routes>
                     </Router>
                 :
