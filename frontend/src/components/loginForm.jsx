@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Loader from "react-js-loader";
 
 export default function Login() {
 
@@ -9,6 +10,7 @@ export default function Login() {
     const inputLabelContainer="flex flex-col gap-1"
     
     const [loginMessageStyle,setLoginMessageStyle]=useState("hidden")
+    const [loading,setLoading]=useState(false)
 
     useEffect(()=>{
         try{
@@ -23,6 +25,7 @@ export default function Login() {
     },[])
 
     const loginUser=(e)=>{
+        setLoading(true)
         e.preventDefault()
         fetch('http://localhost:3000/login', {
             method: 'POST',
@@ -34,9 +37,16 @@ export default function Login() {
         })
         .then(res => res.json())
         .then(res=>{
-            console.log(res,"res")
-            document.cookie = "LOGIN_INFO="+ res.token +";max-age=60*60;path=/"
-            window.location.href="/"
+            if (res.error){
+                setLoginMessageStyle("text-red-500")
+                document.getElementById("message").innerHTML=res.error
+                setLoading(false)
+                return
+            }
+            else{
+                document.cookie = "LOGIN_INFO="+ res.token +";max-age=60*60*24;path=/"
+                window.location.href="/"
+            }
         })
         .catch(err => console.log(err))
 
@@ -68,6 +78,7 @@ export default function Login() {
             </div>
             <div className="flex items-center gap-5 mt-10">
                 <button className="w-fit px-10 rounded-full hover:bg-[#50ad9e] p-3 text-center font-normal text-md hover:cursor-pointer bg-[#5bc7b5] shadow-2xl" onClick={loginUser}>
+
                     Login
                 </button>
 
@@ -76,6 +87,12 @@ export default function Login() {
                         <div className="underline opacity-50 hover:opacity-100 underline-offset-4">New Here ?</div>
                     </a>
                 </div>
+            </div>
+            <div className="absolute right-10 bottom-10">
+                {
+                    loading &&
+                    <Loader type="bubble-scale" bgColor="#52c3b0" color="red" size={100} />
+                }
             </div>
         </form>
     )

@@ -11,7 +11,6 @@ export default function Home() {
             if (check!==false){
                 setLoggedIn(true)
             }
-            console.log(check,"check")
         }
         catch(err){
             console.log(err ,"err")

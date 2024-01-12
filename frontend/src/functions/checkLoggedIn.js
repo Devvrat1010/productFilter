@@ -12,17 +12,22 @@ export function checkLoggedIn() {
         .then(res => res.json())
         .then(res=>{
             if (res.error){
-                alert(res.error,"error")
                 return false
             }
             else{
+                const check=window.sessionStorage.getItem("user")
+                if (check){
+                    return true
+                }
+                else{
+                    window.sessionStorage.setItem("user",JSON.stringify(res.user))
+                }
                 return true
             }
             
         })
         .catch(err =>{  
             console.log(err,"err")
-            alert(err,"err")
             return false
         })
     }

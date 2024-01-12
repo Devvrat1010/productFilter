@@ -26,11 +26,11 @@ router.post("/", async (req, res) => {
                 res.status(200).json({message:user,token:token})
             }
             else{
-                res.status(400).json({error:"Invalid credentials"})
+                res.status(200).json({error:"Invalid credentials"})
             }
         }
         else{
-            res.status(400).json({error:"Invalid credentials"})
+            res.status(200).json({error:"Invalid credentials"})
             return
         }
     }

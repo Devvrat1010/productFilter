@@ -60,14 +60,14 @@ router.post("/", async (req, res) => {
                 createAdmin=true
             }
             else{
-                return res.status(400).json({error:"Invalid admin email"})
+                return res.status(200).json({error:"Invalid admin email"})
             }   
         }
 
         const emailExists = existingUser.some((u) => u.email === req.body.email);
         
         if (emailExists) {
-            return res.status(400).json({ error: "Email already exists" });
+            return res.status(200).json({ error: "Email already exists" });
         }
 
         else{
