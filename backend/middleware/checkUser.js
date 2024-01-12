@@ -2,6 +2,7 @@ const express=require('express')
 const router=express.Router()
 const jwt=require('jsonwebtoken')
 const User=require('../models/users')
+const {ObjectId}=require('mongodb')
 
 
 router.get("/",async (req,res,next)=>{
@@ -10,32 +11,25 @@ router.get("/",async (req,res,next)=>{
     
     if (token){
         jwt.verify(token,process.env.JWT_SECRET,async (err,decodedToken)=>{
-            if(err){
-                console.log(err.message)
-                res.status(500).json({error:err.message})
+
+            if (err){
+                res.status(200).json({error:err,message:"Server Error"})
+                return 
             }
             else{
+
                 console.log(decodedToken,"decodedToken")
-                const existingUser=await User.find()
-
-                const user=existingUser.filter((user)=>{
-                    const curr=JSON.stringify(user._id)
-                    const curr2=JSON.stringify(decodedToken.id)
-                    return curr===curr2
-                })
-
-                if (user) {
-                    // console.log(user, "user");
-                    res.status(200).json({ data: user });
-                } else {
-                    // console.log("user not found");
-                    res.status(500).json({ error: "user not found" });
-                }
+                const check=decodedToken.id
+                console.log(check,"check")
+                const user=await User()
+                const final=await user.findOne({_id:new ObjectId(decodedToken.id)})
+                res.status(200).json({user:final})
+                return
             }
         })
     }
     else{
-        res.status(500).json({error:"token not found"})
+        res.status(500).json({error:"token not founddd"})
     }
 
     

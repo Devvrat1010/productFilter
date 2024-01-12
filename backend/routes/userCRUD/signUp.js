@@ -28,12 +28,12 @@ const validateAdmin=async (email)=>{
 }
 
 const validate=async (data)=>{
-    const {email,password,admin}=data
+    const {email,password,number,name}=data
 
-    if (!email || !password){
+    if (!email || !password || !number || !name) {
         return {message:"Please enter all the fields"}
     }
-    if (email.length<1 || password.length<1){
+    if (email.length<1 || password.length<1 || number.length<1 || name.length<1){
         return {message:"Please enter all the fields"}
     }
     if (password.length<6){
@@ -42,6 +42,7 @@ const validate=async (data)=>{
     if (email.includes(" ")){
         return {message:"Invalid email address"}
     }
+
     return true
 }
 
@@ -86,7 +87,7 @@ router.post("/", async (req, res) => {
                 return
             }
             else{
-                res.status(400).json({error:validation.message||"server side error"})
+                res.status(200).json({error:validation.message||"server side error"})
                 return
             }
         }
