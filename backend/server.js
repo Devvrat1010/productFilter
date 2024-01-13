@@ -20,8 +20,7 @@ const dbURI=process.env.DB_URI
 const PORT = process.env.PORT || 3000
 
 
-const saveImage = require("./routes/imageCRUD/saveImage");
-const getImage = require("./routes/imageCRUD/getImage");
+
 const signUp = require("./routes/userCRUD/signUp");
 const login=require('./routes/userCRUD/login')
 const checkUser=require('./middleware/checkUser')
@@ -32,8 +31,6 @@ const getAllUsers=require('./routes/userCRUD/getAllUsers')
 const getOneUser=require('./routes/userCRUD/getOneUser')
 
 
-app.use("/saveImage", saveImage)
-app.use("/getImage", getImage)
 app.use("/signUp", signUp)
 app.use("/login", login)
 app.use("/checkUser", checkUser)
