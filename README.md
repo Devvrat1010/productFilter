@@ -34,7 +34,7 @@ AccessMaster allows access to seven admin accounts. Here are the authorized admi
 
 ## Getting Started
 
-1. Visit [AccessMaster](accessmaster.netlify.app) and log in using one of the authorized admin emails.
+1. Visit [AccessMaster](https://accessmaster.netlify.app/) and log in using one of the authorized admin emails.
 2. Explore the user management dashboard to access the various features.
 
 ## Support
