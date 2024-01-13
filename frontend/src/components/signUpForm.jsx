@@ -38,7 +38,7 @@ export default function Login() {
         e.preventDefault()
         // console.log(credentials,"credentials")
 
-        fetch('http://localhost:3000/signUp', {
+        fetch('https://backend-productfilter.onrender.com/signUp', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

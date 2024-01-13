@@ -28,7 +28,7 @@ export default function EditUserForm(props) {
     const updateDetails=async (e)=>{
         e.preventDefault()
         // console.log(credentials,"credentials")
-        fetch('http://localhost:3000/update',
+        fetch('https://backend-productfilter.onrender.com/update',
         {
             method:"POST",
             headers: { 'Content-Type': 'application/json' },

@@ -24,7 +24,7 @@ export default function ManageUsers() {
                 }
             }
 
-            fetch('http://localhost:3000/getAllUsers', {
+            fetch('https://backend-productfilter.onrender.com/getAllUsers', {
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' },
             })
@@ -64,7 +64,7 @@ export default function ManageUsers() {
     const deleteSelectedUser=(e)=>{
         const curr=e.target.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[1].innerHTML
         setSelectedUser(allUsers.filter((user)=>user.email===curr)[0])
-        fetch('http://localhost:3000/delete', {
+        fetch('https://backend-productfilter.onrender.com/delete', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

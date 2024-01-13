@@ -1,7 +1,7 @@
 export function checkLoggedIn() {
     try{
         const token=document.cookie.split('; ').find(row => row.startsWith('LOGIN_INFO')).split('=')[1];
-        fetch('http://localhost:3000/checkUser', {
+        fetch('https://backend-productfilter.onrender.com/checkUser', {
             method: 'GET',
             headers: { 
                 'Content-Type': 'application/json', 
