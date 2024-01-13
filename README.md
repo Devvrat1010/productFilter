@@ -1,10 +1,10 @@
-# AdminCentral User Management Platform
+# AccessMaster User Management Platform
 
-Welcome to AdminCentral, your go-to platform for effortless user management on your website.
+Welcome to AccessMaster, your go-to platform for effortless user management on your website.
 
 ## Overview
 
-AdminCentral is designed to provide administrators with a centralized hub for managing users efficiently. This platform simplifies user onboarding, ensures streamlined access control, and enhances overall security.
+AccessMaster is designed to provide administrators with a centralized hub for managing users efficiently. This platform simplifies user onboarding, ensures streamlined access control, and enhances overall security.
 
 ## Features
 
@@ -15,14 +15,14 @@ AdminCentral is designed to provide administrators with a centralized hub for ma
 
 ## Prerequisites
 
-Before you start using AdminCentral, make sure you have the following:
+Before you start using AccessMaster, make sure you have the following:
 
-- Access to the AdminCentral platform.
+- Access to the AccessMaster platform.
 - A valid admin email.
 
 ## Admin Emails
 
-AdminCentral allows access to seven admin accounts. Here are the authorized admin email addresses:
+AccessMaster allows access to seven admin accounts. Here are the authorized admin email addresses:
 
 1. user1@gmail.com
 2. user2@gmail.com
@@ -34,11 +34,11 @@ AdminCentral allows access to seven admin accounts. Here are the authorized admi
 
 ## Getting Started
 
-1. Visit [AdminCentral](#) and log in using one of the authorized admin emails.
+1. Visit [AccessMaster](accessmaster.netlify.app) and log in using one of the authorized admin emails.
 2. Explore the user management dashboard to access the various features.
 
 ## Support
 
-If you encounter any issues or have questions, please contact our support team at [support@admincentral.com](mailto:support@admincentral.com).
+If you encounter any issues or have questions, please contact our support team at [support@accessmaster.com](mailto:rathoddevvratsingh777@gmail.com).
 
-Thank you for choosing AdminCentral for your user management needs!
+Thank you for choosing AccessMaster for your user management needs!
