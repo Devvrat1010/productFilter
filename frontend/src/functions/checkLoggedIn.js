@@ -15,26 +15,20 @@ export function checkLoggedIn() {
                 return false
             }
             else{
-                // const check=window.sessionStorage.getItem("user")
-                // if (check){
-                //     return true
-                // }
-                // else{
-                    window.sessionStorage.setItem("user",JSON.stringify(res.user))
-                // }
+                window.sessionStorage.setItem("user",JSON.stringify(res.user))
                 return true
             }
             
         })
         .catch(err =>{  
             window.sessionStorage.removeItem("user")
-            console.log(err,"err")
+            // console.log(err,"err")
             return false
         })
     }
     catch(err){
         window.sessionStorage.removeItem("user")
-        console.log(err,"err")
+        // console.log(err,"err")
         return false
     }
 }

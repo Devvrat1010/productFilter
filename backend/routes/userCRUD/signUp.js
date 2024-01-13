@@ -52,10 +52,8 @@ router.post("/", async (req, res) => {
 
         const admin=req.body.admin
         let createAdmin=false
-        console.log(req.body,"req.body")
         if (admin){
             const checkAdmin=await validateAdmin(req.body.email)
-            console.log(checkAdmin,"checkAdmin")
             if (checkAdmin===true){
                 createAdmin=true
             }

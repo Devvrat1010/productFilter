@@ -20,7 +20,6 @@ router.post("/", async (req, res) => {
         const user=await conn.findOne({email:email})
         if (user){
             const authorize=bcrypt.compareSync(password,user.password)
-            console.log(authorize)
             if (authorize){
                 const token=createToken(user._id)
                 res.status(200).json({message:user,token:token})
