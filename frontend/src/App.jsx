@@ -25,16 +25,14 @@ function App() {
 
     return (
         <div>
-            {
-                <Router>
-                    <Routes>
-                        <Route path='/' element={<Home />} />
-                        <Route path='/userDashboard' element={<UserDashboard/>} />
-                        <Route path='/authenticate' element={<Authenticate/>} />
-                        <Route path='/manageUsers' element={<ManageUsers/>} />
-                    </Routes>
-                </Router>
-            }
+            <Router>
+                <Routes>
+                    <Route path='/' element={<Home />} />
+                    <Route path='/userDashboard' element={<UserDashboard/>} />
+                    <Route path='/authenticate' element={<Authenticate/>} />
+                    <Route path='/manageUsers' element={<ManageUsers/>} />
+                </Routes>
+            </Router>
         </div>
     )
 }
