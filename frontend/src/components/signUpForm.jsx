@@ -11,6 +11,7 @@ export default function Login() {
     const inputLabelContainer="flex flex-col gap-1"
 
     const [signUpMessageStyle,setsignUpMessageStyle]=useState("hidden")
+    const [errorMessage,setErrorMessage]=useState("")
 
     const reader = new FileReader()
 
@@ -35,7 +36,7 @@ export default function Login() {
     }
     const signUpUser=(e)=>{
         e.preventDefault()
-        console.log(credentials,"credentials")
+        // console.log(credentials,"credentials")
 
         fetch('http://localhost:3000/signUp', {
             method: 'POST',
@@ -45,26 +46,31 @@ export default function Login() {
                 password : credentials.password,
                 name : credentials.name,
                 number : credentials.number,
-                image : credentials.image,
+                image : credentials.profilePic,
                 admin: credentials.admin
              })
         })
         .then(res => res.json())
         .then(res=>{
+            console.log(res,"res")
             if (res.error){
                 alert(res.error)
+                setErrorMessage(res.error)
                 return
             }
             else{
-                alert("Sign Up Successful")
-                document.cookie = "LOGIN_INFO="+ res.token +";max-age=60*60;path=/"
+                // document.cookie = "LOGIN_INFO="+ res.token +";max-age=60*60;path=/"
+                // const checking=checkLoggedIn()
+                // if (checking!==false){
+                //     window.location.href="/"
+                // }
+                window.location.href="/"
             }
         })
         .catch(err =>{ 
             console.log(err)
             alert(err)
         })
-        console.log(document.cookie)
     }
 
     return (
@@ -123,7 +129,7 @@ export default function Login() {
                     </div>
                 </div>
                 <div id="message" className={signUpMessageStyle } >
-
+                    {errorMessage}
                 </div>
             </div>
                     

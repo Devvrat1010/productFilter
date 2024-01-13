@@ -18,11 +18,9 @@ const validateAdmin=async (email)=>{
     const checkMail=await conn.findOne({email:email})
     console.log(checkMail,"checkMail")
     if (!checkMail){
-        console.log("false--------------------------------------")
         return false
     }
     else{
-        console.log("true--------------------------------------")
         return true
     }
 }
@@ -56,11 +54,14 @@ router.post("/", async (req, res) => {
         let createAdmin=false
 
         if (admin){
-            if (await validateAdmin(req.body.email)===true){
+            const checkAdmin=await validateAdmin(req.body.email)
+            console.log(checkAdmin,"checkAdmin")
+            if (checkAdmin===true){
                 createAdmin=true
             }
             else{
-                return res.status(200).json({error:"Invalid admin email"})
+               res.status(200).json({error:"Invalid admin email \nContact your admin to get admin access"})
+               return
             }   
         }
 
@@ -83,7 +84,7 @@ router.post("/", async (req, res) => {
                     admin:createAdmin
                 })
                 const token=createToken(new_user._id)
-                res.status(200).cookie('LOGIN_INFO',token).json({message:new_user,token:token})
+                res.status(200).cookie('LOGIN_INFO',token).json({message:req.body,token:token})
                 return
             }
             else{

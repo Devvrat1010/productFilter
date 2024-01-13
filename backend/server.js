@@ -27,6 +27,9 @@ const login=require('./routes/userCRUD/login')
 const checkUser=require('./middleware/checkUser')
 const update=require('./routes/userCRUD/update')
 const deleteUser=require('./routes/userCRUD/delete')
+const writeAdminMails=require('./routes/userCRUD/writeAdminMails')
+const getAllUsers=require('./routes/userCRUD/getAllUsers')
+const getOneUser=require('./routes/userCRUD/getOneUser')
 
 
 app.use("/saveImage", saveImage)
@@ -36,6 +39,9 @@ app.use("/login", login)
 app.use("/checkUser", checkUser)
 app.use("/update", update)
 app.use("/delete", deleteUser)
+app.use("/writeAdminMails", writeAdminMails)
+app.use("/getAllUsers", getAllUsers)
+app.use("/getOneUser", getOneUser)
 
 const start=async()=>{
     try{
