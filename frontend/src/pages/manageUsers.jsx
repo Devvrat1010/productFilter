@@ -52,9 +52,13 @@ export default function ManageUsers() {
 
     const editSelectedUser=(e)=>{
         setEdit(!edit)
-        const curr=e.target.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[1].innerHTML
-        setSelectedUser(allUsers.filter((user)=>user.email===curr)[0])
-        console.log(selectedUser,"edit")
+        if (edit===true){
+            if (userDetails.admin===true){
+                const curr=e.target.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[1].innerHTML
+                setSelectedUser(allUsers.filter((user)=>user.email===curr)[0])
+                console.log(selectedUser,"edit")
+            }
+        }
     }
     
     const deleteSelectedUser=(e)=>{
@@ -98,9 +102,8 @@ export default function ManageUsers() {
                                     {
                                         edit &&
                                         <EditUserForm
-                                        userDetails={selectedUser}
+                                        userDetails={user}
                                         />
-                                        
                                     }
                                     <div className={buttonStyle} onClick={editSelectedUser}>
                                         {

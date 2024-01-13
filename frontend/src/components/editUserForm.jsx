@@ -9,6 +9,9 @@ export default function EditUserForm(props) {
 
     const inputLabelContainer="flex flex-col gap-1"
 
+    const formStyle=props.manage ? "text-lg text-gray-100 flex flex-col xl:gap-5 2xl:gap-6 min-[1919px]:gap-10" :
+    "text-lg text-gray-100 flex xl:gap-5 2xl:gap-6 min-[1919px]:gap-10"
+
     const reader = new FileReader()
     const uploadProfilePic=(e)=>{
         reader.onload=(e)=>{
@@ -57,7 +60,7 @@ export default function EditUserForm(props) {
     return (
         <form className=' h-fit rounded-md font-poppins gap-3 text-white'>
 
-            <div className='text-lg text-gray-100 flex xl:gap-5 2xl:gap-6 min-[1919px]:gap-10'>
+            <div className='text-lg text-gray-100 flex flex-col xl:gap-5 2xl:gap-6 min-[1919px]:gap-10'>
                 <div className={inputLabelContainer}>
                     <label>FULL NAME</label>
                     <input type="text" id="name" name="name" placeholder="Enter Your Name"  defaultValue={props.userDetails.name} className={inputStyle}

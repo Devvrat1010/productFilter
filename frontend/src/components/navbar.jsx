@@ -7,30 +7,31 @@ export default function Navbar(props){
     const navbarButton="text-[#242c44] px-4 py-2 rounded-full shadow-2xl text-lg font-medium text-white bg-gradient-to-r from-[#6de4cc] to-[#52c3bA] hover:from-[#52c3bA] hover:to-[#6de4cc] hover:shadow-none hover:cursor-pointer h-fit"
     const [loggedIn,setLoggedIn]=useState(false)
 
-    const [user,setUser]=useState({admin:false})
+    const [currUser,setCurrUser]=useState({admin:false})
     
     useEffect(()=>{
         setLoggedIn(props.loggedIn)
         try{
             try{
                 const checkUser=window.sessionStorage.getItem("user")
-                setUser(JSON.parse(checkUser))
-                // console.log(checkUser,"userNavbar")
-                setLoggedIn(true)
+                console.log(checkUser,"checkUser")
+                if (checkUser!==null){
+                    setCurrUser(JSON.parse(checkUser))
+                    setLoggedIn(true)
+                }
             }
             catch(err){
-                console.log("Not Logged In")
                 const loggedIn=checkLoggedIn()
                 if (loggedIn!==false){
                     setLoggedIn(true)
-                    // window.location.href="/"
                 }
+                
             }
         }
         catch(err){
             console.log("Not Logged In")
         }
-    },[props.loggedIn])
+    },[])
 
     const logoutClicked=()=>{
         logout()
@@ -42,6 +43,8 @@ export default function Navbar(props){
     return(
         <div className="px-20">
             <div className="flex justify-between py-3 px-2 font-poppins font-light text-xl">
+                <a href="/">
+
                 <div className="border-[#242c44] border-2 bg-[#52c3ba] p-1  flex">
                     <div className="bg-[#242c44] p-2 text-[#52c3ba] text-2xl">
                         ACCESS
@@ -50,6 +53,7 @@ export default function Navbar(props){
                         MASTER
                     </div>
                 </div>
+                </a>
                 {
                     props.loggedIn ?
                     <>
@@ -62,7 +66,7 @@ export default function Navbar(props){
                             </a>
                         }
                         {
-                            (!props.manageUsers) &&
+                            (currUser.admin && !props.manageUsers) &&
                                 <a href="/manageUsers">
                                     <div className={navbarButton}>Manage Users</div>
                                 </a>

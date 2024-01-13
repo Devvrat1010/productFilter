@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Loader from "react-js-loader";
+import { checkLoggedIn } from "../functions/checkLoggedIn";
 
 export default function Login() {
 
@@ -45,7 +46,12 @@ export default function Login() {
             }
             else{
                 document.cookie = "LOGIN_INFO="+ res.token +";max-age=60*60*24;path=/"
-                window.location.href="/"
+                setTimeout(()=>{
+                    checkLoggedIn()
+                    setTimeout(()=>{
+                        window.location.href="/"
+                    },100)
+                },100)
             }
         })
         .catch(err => console.log(err))
